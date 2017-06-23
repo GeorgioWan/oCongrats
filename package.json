@@ -13,12 +13,14 @@
   },
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-md": "^1.0.15"
   },
   "devDependencies": {
-    "nwb": "0.16.x"
+    "nwb": "0.16.x",
+    "nwb-sass": "^0.8.1"
   },
-  "author": "",
+  "author": "OAwan (https://github.com/GeorgioWan)",
   "license": "MIT",
   "repository": ""
 }
