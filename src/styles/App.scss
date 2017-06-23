@@ -1,0 +1,58 @@
+@import 'globals';
+@include react-md-everything;
+
+@import 'animate';
+
+$_font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+
+html * {
+  font-family: $_font-family;
+}
+
+#rc-main{
+    position: relative;
+    top: 50%;
+    transform: translateY( -50% );
+    text-align: center;
+}
+
+.rc-info-group{
+    margin-top: 15px;
+}
+
+.rc-info{
+    color: #999;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    font-weight: lighter;
+    
+    b{
+        font-size: 1.2em;
+        font-weight: bolder;
+    }
+}
+
+#rc-post-url{
+    width: 750px;
+    margin: 15px auto;
+    
+    #post-url{
+        text-align: center;
+    }
+}
+
+#rc-lottery{
+    #rc-quota{
+        width: 150px;
+        margin: 15px auto;
+        #quota{
+            text-align: center;
+        }
+    }
+    span{
+        display: inline-block;
+        
+        &:nth-child(2){
+            padding: 0 12px;
+        }
+    }
+}
