@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Drawer, ListItem, Toolbar, Divider, FontIcon } from 'react-md'
 
 const InfoIcon = () => <FontIcon>info</FontIcon>;
+const ContactIcon = () => <FontIcon>question_answer</FontIcon>;
 
 class DrawerMenu extends Component {
     state = {
@@ -37,15 +38,15 @@ class DrawerMenu extends Component {
         );
         const items = [
             <ListItem primaryText="粉絲團" key={0}/>,
-            <ListItem primaryText="電腦版如何取得文章連結" rightIcon={<InfoIcon />} key={1}/>,
-            <ListItem primaryText="手機版如何取得文章連結" rightIcon={<InfoIcon />} key={2}/>,
-            <ListItem primaryText="想提供建議或幫助" key={3}/>,
+            <ListItem primaryText="「電腦版」如何取得文章連結" rightIcon={<InfoIcon />} key={1}/>,
+            <ListItem primaryText="「手機版」如何取得文章連結" rightIcon={<InfoIcon />} key={2}/>,
+            <ListItem primaryText="嘿！我想提供建議或幫助" rightIcon={<ContactIcon />} key={3}/>,
             <Divider key={4}/>,
         ];
         
         if ( user.email ) {
             items.push(
-                <ListItem component={() => 
+                <ListItem primaryText='' component={() => 
                     <div id="rc-drawer-user">
                         <img src={ user.photoURL } />
                         <h3>{user.name}</h3>
@@ -54,7 +55,7 @@ class DrawerMenu extends Component {
                 } key={5}/>);
                 
             items.push(
-                <ListItem component={() => 
+                <ListItem primaryText='' component={() => 
                     <div id="rc-drawer-signout">
                         <Button raised primary label="登出" onClick={this.handleSignOut.bind(this)}></Button>
                     </div>
@@ -63,7 +64,7 @@ class DrawerMenu extends Component {
             
         return (
             <div id="rc-drawer">
-                <Button icon primary iconClassName='fa fa-cog' onClick={this.handleClick.bind(this)}></Button>
+                <Button icon iconClassName='fa fa-bars' onClick={this.handleClick.bind(this)}></Button>
                 <Drawer 
                     visible={visible}
                     position='left'

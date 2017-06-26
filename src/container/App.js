@@ -191,6 +191,9 @@ class App extends Component {
     }
     handleBack(){
         this.setState(update( this.state, {
+            reactions: { $set: [] },
+            comments: { $set: [] },
+            shareds: { $set: [] },
             queried: {
                 reactions: { $set: false },
                 comments: { $set: false },
@@ -206,7 +209,7 @@ class App extends Component {
         return (
             <div id="rc-main" >
                 <DrawerMenu user={user} onSignOut={this.handleFBLogin.bind(this)}/>
-                <div id="rc-title">
+                <div id="rc-title" className={ queriedDone ? 'slideUp' : 'slideDown' }>
                     <h1>喔！我的開獎達人！</h1>
                 </div>
                 <div id="rc-body">
@@ -230,6 +233,12 @@ class App extends Component {
                     :
                     <Login onClick={this.handleFBLogin.bind(this)}/>
                 }
+                </div>
+                <div id="rc-footer" className={ queriedDone ? '' : '' }>
+                    {
+                        !queriedDone ? <div>－</div> : ''
+                    }
+                    Copyright © 2017 <span className="fa fa-heart"></span> OAwan
                 </div>
             </div>
         );

@@ -10,7 +10,7 @@ class BangList extends Component {
             {
                 bang.length > 0 ?
                 bang.map((b, index) => (
-                    <Bang index={index} bang={b} />
+                    <Bang key={index} bang={b} />
                 ))
                 : ''
             }

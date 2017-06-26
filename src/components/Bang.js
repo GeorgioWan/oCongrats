@@ -87,13 +87,11 @@ class Bang extends Component {
         );
     }
     render() {
-        const { index } = this.props;
         const bangCard = this.bangCard();
         
         return (
             <Paper 
                 className="rc-bang-paper"
-                key={index} 
                 zDepth={0}
                 raiseOnHover={true}>
                 
