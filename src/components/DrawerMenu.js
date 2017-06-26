@@ -36,6 +36,7 @@ class DrawerMenu extends Component {
                 className="md-divider-border md-divider-border--bottom"
             />
         );
+        
         const items = [
             <ListItem primaryText="粉絲團" key={0}/>,
             <ListItem primaryText="「電腦版」如何取得文章連結" rightIcon={<InfoIcon />} key={1}/>,
@@ -43,6 +44,8 @@ class DrawerMenu extends Component {
             <ListItem primaryText="嘿！我想提供建議或幫助" rightIcon={<ContactIcon />} key={3}/>,
             <Divider key={4}/>,
         ];
+        
+        let key = 5 ;
         
         if ( user.email ) {
             items.push(
@@ -52,14 +55,23 @@ class DrawerMenu extends Component {
                         <h3>{user.name}</h3>
                         <span>{user.email}</span>
                     </div>
-                } key={5}/>);
+                } key={key++}/>);
                 
             items.push(
                 <ListItem primaryText='' component={() => 
                     <div id="rc-drawer-signout">
                         <Button raised primary label="登出" onClick={this.handleSignOut.bind(this)}></Button>
                     </div>
-                } key={6}/>);
+                } key={key++}/>);
+        }
+        
+        if ( screen.width < 769 ) {
+            items.push(
+                <ListItem primaryText='' component={() => 
+                    <div id="rc-drawer-footer">
+                        Copyright © 2017 <span className="fa fa-heart"></span> <b>OAwan</b>
+                    </div>
+                } key={key++}/>);
         }
             
         return (

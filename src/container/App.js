@@ -3,6 +3,8 @@ import '../styles/App.scss'
 import React, { Component } from 'react'
 import update from 'react/lib/update'
 
+import { Button } from 'react-md'
+
 import * as firebase from 'firebase'
 
 import { 
@@ -209,10 +211,10 @@ class App extends Component {
         return (
             <div id="rc-main" >
                 <DrawerMenu user={user} onSignOut={this.handleFBLogin.bind(this)}/>
-                <div id="rc-title" className={ queriedDone ? 'slideUp' : 'slideDown' }>
+                <div id="rc-title" className={ queriedDone ? 'up' : '' }>
                     <h1>喔！我的開獎達人！</h1>
                 </div>
-                <div id="rc-body">
+                <div id="rc-body" className={ queriedDone ? 'up' : '' }>
                 {
                     auth === true ?
                     <div>
@@ -234,12 +236,18 @@ class App extends Component {
                     <Login onClick={this.handleFBLogin.bind(this)}/>
                 }
                 </div>
-                <div id="rc-footer" className={ queriedDone ? '' : '' }>
-                    {
-                        !queriedDone ? <div>－</div> : ''
-                    }
-                    Copyright © 2017 <span className="fa fa-heart"></span> OAwan
-                </div>
+                {
+                    queriedDone ?
+                    <Button id="rc-back" icon iconClassName='fa fa-chevron-left' tooltipLabel='上一步' onClick={this.handleBack.bind(this)}></Button>
+                    : ''
+                }
+                {
+                    screen.width > 768 ?
+                    <div id="rc-footer" className={ queriedDone ? 'down' : '' }>
+                        Copyright © 2017 <span className="fa fa-heart"></span> <b>OAwan</b>
+                    </div>
+                    : ''
+                }
             </div>
         );
     }

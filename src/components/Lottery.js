@@ -83,11 +83,15 @@ class Lottery extends Component {
         
         this.setState({ bang });
     }
-    handleBack(){
-        const { goBack } = this.props;
+    handleMinus(){
+        let { quota } = this.state;
         
-        if( goBack )
-            goBack();
+        this.setState({ quota: quota - 1 });
+    }
+    handlePlus(){
+        let { quota } = this.state;
+        
+        this.setState({ quota: quota + 1 });
     }
     render() {
         const { reactions, comments, shareds } = this.props;
@@ -96,21 +100,28 @@ class Lottery extends Component {
         return (
             <div id="rc-lottery">
                 <div id="rc-quota">
-                    <TextField id="quota"
-                               label="抽獎名額"
-                               type="number"
-                               customSize="title"
-                               lineDirection='center'
-                               value={quota}
-                               onChange={ this.handleChange.bind(this) }
-                    />
+                    <Button 
+                        icon 
+                        primary
+                        disabled={ quota === 1 }
+                        iconClassName='fa fa-minus' 
+                        onClick={this.handleMinus.bind(this)}></Button>
+                    <div className="quota">
+                        <TextField id="quota"
+                                   label="抽獎名額"
+                                   type="number"
+                                   customSize="title"
+                                   lineDirection='center'
+                                   value={quota}
+                                   onChange={ this.handleChange.bind(this) }
+                        />
+                    </div>
+                    <Button 
+                        icon 
+                        primary
+                        iconClassName='fa fa-plus' 
+                        onClick={this.handlePlus.bind(this)}></Button>
                 </div>
-                <Button 
-                    className="rc-back"
-                    icon
-                    iconClassName='fa fa-chevron-left'
-                    tooltipLabel='上一步'
-                    onClick={this.handleBack.bind(this)}></Button>
                 <div>
                     <LotteryButton 
                         label="從「心情」抽獎囉！"

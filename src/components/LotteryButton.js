@@ -20,12 +20,26 @@ class LotteryButton extends Component {
             <span className="rc-lottery-btn">
                 {
                     quota <= total ?
-                    <div className="rc-lottery-btn-info">從 {total} 人中抽 {quota} 位</div>
+                    <div className="rc-lottery-btn-info">
+                        {
+                            screen.width > 768 ?
+                            `從 ${total} 人中抽 ${quota} 位`
+                            :
+                            `${quota}/${total}`
+                        }
+                    </div>
                     :
-                    <div className="rc-lottery-btn-info rc-lottery-btn-info-warn">人數不滿 {quota} 位喔！(共 {total} 人)</div>
+                    <div className="rc-lottery-btn-info rc-lottery-btn-info-warn">
+                    {
+                        screen.width > 768 ?
+                        `人數不滿 ${quota} 位喔！(共 ${total} 人)`
+                        :
+                        `${quota}/${total}人數不足`
+                    }
+                    </div>
                 }
                 <Button raised secondary
-                        label={label}
+                        label={ screen.width > 768 ? label : ''}
                         iconClassName={icon}
                         disabled={ total === 0 }
                         onClick={this.handleClick.bind(this)}></Button>

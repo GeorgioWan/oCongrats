@@ -1,8 +1,6 @@
 @import 'globals';
 @include react-md-everything;
 
-@import 'animate';
-
 $_font-family: 'Roboto', 'Noto Sans TC', sans-serif;
 
 html * {
@@ -18,10 +16,36 @@ html * {
     position: relative;
     top: 30%;
     transform: translateY(-50%);
+    transition: .5s ease;
+    
+    &.up{
+        top: 10%;
+    }
 }
 #rc-body{
     position: relative;
     top: 30%;
+    transition: .5s ease .1s;
+    
+    &.up{
+        top: 10%;
+    }
+}
+#rc-footer, #rc-drawer-footer{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: $md-primary-color;
+    opacity: .8;
+    
+    span{
+        color: $md-secondary-color;
+    }
+    b{
+        font-weight: bold;
+    }
 }
 
 .rc-info-group{
@@ -29,13 +53,31 @@ html * {
 }
 
 .rc-info{
-    color: #999;
+    color: #666;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     font-weight: lighter;
+    margin: 0 auto;
     
     b{
         font-size: 1.2em;
         font-weight: bolder;
+    }
+    
+    @media screen and ( max-width: 768px ){
+        width: 80%;
+    }
+    
+}
+
+#rc-back{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    z-index: 99;
+    transform: translateY(-50%);
+    
+    @media screen and ( max-width: 768px){
+        left: 0;
     }
 }
 
@@ -46,20 +88,25 @@ html * {
     #post-url{
         text-align: center;
     }
+    
+    @media screen and ( max-width: 768px ){
+        width: 80%;
+    }
 }
 
 #rc-lottery{
+    
     #rc-quota{
-        width: 150px;
+        //width: 150px;
         margin: 15px auto;
         #quota{
             text-align: center;
         }
-    }
-    .rc-back{
-        position: absolute;
-        left: 10px;
-        z-index: 99;
+        .quota{
+            display: inline-block;
+            width: 150px;
+            margin: 0 20px;
+        }
     }
     .rc-lottery-btn{
         display: inline-block;
@@ -83,9 +130,16 @@ html * {
 
 #rc-bang-list{
     width: 970px;
-    height: 40vh;
+    min-height: 180px;
+    max-height: 45vh;
+    padding: 5px 0 20px 0;
     margin: 20px auto;
     overflow-y: auto;
+    
+    @media screen and ( max-width: 768px){
+        width: 80%;
+        padding: 0;
+    }
     
     &::-webkit-scrollbar-track
     {

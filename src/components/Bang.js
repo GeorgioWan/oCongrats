@@ -33,6 +33,7 @@ const reactions = {
 
 class Bang extends Component {
     timeFormat(t){
+        // Some problame on mobile...
         let time = new Date(t);
         
         return `${time.getFullYear()}年${time.getMonth()}月${time.getDate()}日`;
@@ -41,7 +42,7 @@ class Bang extends Component {
         const { bang } = this.props;
         const type = bang.queryType;
         let id, bg_url, avatar, username, created_time, message;
-        
+        let ttt ;
         if ( type === 'reactions' ){
             id = bang.id,
             bg_url = reactions.url[bang.type],
@@ -66,6 +67,7 @@ class Bang extends Component {
         
         username = username.length > 20 ?
                     `${username.substring(0,20)}...` : username;
+        
         
         return (
             <a href={ `https://www.facebook.com/${id}` } target='_blank'>
