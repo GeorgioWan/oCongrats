@@ -10,10 +10,18 @@ html * {
 }
 
 #rc-main{
-    position: relative;
-    top: 50%;
-    transform: translateY( -50% );
+    height: inherit;
     text-align: center;
+    overflow: hidden;
+}
+#rc-title{
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+}
+#rc-body{
+    position: relative;
+    top: 30%;
 }
 
 .rc-info-group{
@@ -48,11 +56,129 @@ html * {
             text-align: center;
         }
     }
-    span{
+    .rc-lottery-btn{
         display: inline-block;
         
         &:nth-child(2){
             padding: 0 12px;
+        }
+        
+        .rc-lottery-btn-info{
+            color: #333;
+            margin: 5px 0;
+            transition: .5s;
+            &.rc-lottery-btn-info-warn{
+                color: $md-secondary-color;
+                transition: .3s;
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+#rc-bang-list{
+    width: 970px;
+    height: 40vh;
+    margin: 20px auto;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar-track
+    {
+    	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    	border-radius: 10px;
+    	background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar
+    {
+    	width: 4px;
+    	background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar-thumb
+    {
+    	border-radius: 10px;
+    	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    	background-color: $md-primary-color;
+    }
+}
+.rc-bang-paper{
+    background: white;
+    width: 300px;
+    height: 90px;
+    display: inline-block;
+    //float: left;
+    margin: 0 10px 10px 10px;
+    
+    .rc-bang-bg{
+        position: relative;
+        height: 100%;
+        background: white;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-position: 170px -23px;
+        
+        &:before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            background-color: rgba(255,255,255,.8);
+        }
+    }
+}
+.rc-bang{
+    text-align: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    &:hover{
+        z-index: 99;
+    }
+    
+    .rc-bang-info{
+        padding-left: 30px;
+        
+        img.avatar{
+            width: 50px;
+            height: 50px;
+        }
+        .rc-bang-created-time{
+            color: gray;
+            position: absolute;
+            right: 2px;
+            font-size: 13px;
+            opacity: .7;
+        }
+        .rc-bang-username{
+            color: black;
+            position: absolute;
+            top: 5px;
+            left: 95px;
+            font-weight: bold;
+            padding-right: 15px;
+        }
+        .rc-bang-actions{
+            position: absolute;
+            top: 25px;
+            left: 95px;
+            color: rgba(0,0,0,.7);
+            padding-right: 15px;
+            
+            b{
+                font-size: 1.1em;
+                font-weight: bold;
+                padding-left: 2px;
+            }
+            img{
+                width: 32px;
+                transition: .5s;
+                &:hover{
+                    transform: scale(4);
+                }
+            }
         }
     }
 }
