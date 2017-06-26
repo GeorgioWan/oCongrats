@@ -9,3 +9,5 @@ export { default as Bang } from './Bang'
 export { default as Comments } from './Comments'
 export { default as Shareds } from './Shareds'
 export { default as Reactions } from './Reactions'
+
+export { default as DrawerMenu } from './DrawerMenu'

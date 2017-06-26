@@ -187,3 +187,28 @@ html * {
         }
     }
 }
+
+#rc-drawer{
+    button{
+        position: absolute;
+        right: 0;
+    }
+}
+#rc-drawer-user{
+    text-align: center;
+    margin-top: 15px;
+    
+    img{
+        box-shadow: 1px 3px 11px #888888;
+    }
+    span{
+        display: block;
+        margin-top: -15px;
+        font-size: .8em;
+        color: gray;
+    }
+}
+#rc-drawer-signout{
+    text-align: center;
+    margin-top: 10px;
+}

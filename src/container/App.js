@@ -3,14 +3,13 @@ import '../styles/App.scss'
 import React, { Component } from 'react'
 import update from 'react/lib/update'
 
-import { Drawer } from 'react-md'
-
 import * as firebase from 'firebase'
 
 import { 
     Login,
     Lottery,
     FetchPost,
+    DrawerMenu,
     
     Reactions, 
     Comments, 
@@ -125,6 +124,12 @@ class App extends Component {
               let access_token = result.credential.accessToken;
               let user = result.user;
               
+              user = {
+                  name: user.displayName,
+                  email: user.email,
+                  photoURL: user.photoURL
+              };
+              
               this.setState({ 
                   auth: true,
                   user,
@@ -145,10 +150,21 @@ class App extends Component {
             
         }
         else {
-            FB.logout((response) => {
-                this.setState({ auth: false });
-                console.log('Logged out.')
-            });
+            firebase.auth().signOut();
+            
+            this.setState(update(this.state, {
+                auth: { $set: false },
+                access_token: { $set: '' },
+                user: { $set: {} },
+                comments: { $set: [] },
+                reactions: { $set: [] },
+                shareds: { $set: [] },
+                queried: {
+                    comments: { $set: false },
+                    reactions: { $set: false },
+                    shareds: { $set: false }
+                }
+            }));
         }
     }
     handleFetchDatas( postID ) {
@@ -183,15 +199,15 @@ class App extends Component {
         }));
     }
     render() {
-        const { auth, access_token, reactions, comments, shareds, queried } = this.state;
+        const { auth, user, access_token, reactions, comments, shareds, queried } = this.state;
         const queriedDone = queried.reactions === true && 
                             queried.comments  === true &&
                             queried.shareds   === true ;
-        
         return (
             <div id="rc-main" >
+                <DrawerMenu user={user} onSignOut={this.handleFBLogin.bind(this)}/>
                 <div id="rc-title">
-                    <h1>OH！開獎囉！</h1>
+                    <h1>喔！我的開獎達人！</h1>
                 </div>
                 <div id="rc-body">
                 {
