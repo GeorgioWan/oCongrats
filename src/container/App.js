@@ -3,7 +3,7 @@ import '../styles/App.scss'
 import React, { Component } from 'react'
 import update from 'react/lib/update'
 
-import { Button, TextField } from 'react-md'
+import * as firebase from 'firebase'
 
 import { 
     Login,
@@ -18,14 +18,11 @@ import {
 class App extends Component {
     state = {
         auth: false,
-        postID: '',
+        user:{},
+        access_token:'',
         reactions: [],
         comments: [],
         shareds: [],
-        lottery: {
-            quota: 1,
-            bang: []
-        },
         queried: {
             reactions: false,
             comments: false,
@@ -66,15 +63,11 @@ class App extends Component {
         FB - Check Status 
     **/
     statusChangeCallback(response, cb) {
-        if (response.status === 'connected') { 
-            //console.log('== CONNECTED ==');
-            this.setState({ auth: true });
-            
+        if (response.status === 'connected') {
             if ( cb )
                 cb();
         }
         else if (response.status === 'not_authorized') {
-            //console.log('== NOT_AUTORIZED ==');
             alert('You need to authorize to sign in with facebook');
             this.setState({ auth: false });
         }
@@ -93,7 +86,9 @@ class App extends Component {
         FB - API fetch datas 
     **/
     fetchData( type, url, query = {} ){
-        FB.api( url, 'GET', query, function(response) {
+        const { access_token } = this.state;
+        
+        FB.api( url, 'GET', {access_token, ...query},function(response) {
             console.log(type, response);
             let datas  = [],
                 data   = response.data,
@@ -101,6 +96,7 @@ class App extends Component {
             
             if ( data )
                 data.forEach((d) => {
+                    d.queryType = type;
                     datas.push( d );
                 });
             
@@ -121,34 +117,54 @@ class App extends Component {
     handleFBLogin() {
         const { auth } = this.state;
         
-        if ( auth === true ) {
+        if ( !auth ) {
+            let provider = new firebase.auth.FacebookAuthProvider();
+            provider.addScope('public_profile');
+            
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+              let access_token = result.credential.accessToken;
+              let user = result.user;
+              
+              this.setState({ 
+                  auth: true,
+                  user,
+                  access_token
+              });
+            }.bind(this)).catch(function(error) {
+              // Handle Errors here.
+              let errorCode = error.code;
+              let errorMessage = error.message;
+              // The email of the user's account used.
+              let email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              let credential = error.credential;
+              // ...
+              
+              console.log( errorCode, errorMessage, email, credential );
+            });
+            
+        }
+        else {
             FB.logout((response) => {
                 this.setState({ auth: false });
                 console.log('Logged out.')
-            });
-        }
-        else {
-            FB.login((response) => {
-                this.checkLoginState();
-            }, {
-                scope: 'public_profile'
             });
         }
     }
     handleFetchDatas( postID ) {
         const 
             reactionsQuery = {
-                'fields': 'name,pic_small,type',
+                'fields': 'name,pic_square,type',
                 'filter': 'stream',
                 'limit' : '5000'
             }, 
             commentsQuery = {
-                'fields': 'attachment,from,message,like_count',
+                'fields': 'attachment,from{id,name,picture},message,like_count,created_time',
                 'filter': 'stream',
                 'limit' : '5000'
             },
             sharedpostsQuery = {
-                'fields': 'from,message',
+                'fields': 'from{id,name,picture},message,created_time',
                 'filter': 'stream',
                 'limit' : '5000'
             };
@@ -158,16 +174,17 @@ class App extends Component {
         this.fetchData( 'shareds', `/${postID}/sharedposts`, sharedpostsQuery );
     }
     render() {
-        const { auth, reactions, comments, shareds, queried } = this.state;
+        const { auth, access_token, reactions, comments, shareds, queried } = this.state;
         const queriedDone = queried.reactions === true && 
                             queried.comments  === true &&
                             queried.shareds   === true ;
         
         return (
             <div id="rc-main" >
-                <div className="slideInUp">
+                <div id="rc-title">
                     <h1>OH！開獎囉！</h1>
                 </div>
+                <div id="rc-body">
                 {
                     auth === true ?
                     <div>
@@ -179,12 +196,15 @@ class App extends Component {
                                 shareds={shareds}
                             />
                             :
-                            <FetchPost onClick={this.handleFetchDatas.bind(this)}/>
+                            <FetchPost 
+                                access_token={access_token}
+                                onClick={this.handleFetchDatas.bind(this)}/>
                         }
                     </div> 
                     :
                     <Login onClick={this.handleFBLogin.bind(this)}/>
                 }
+                </div>
             </div>
         );
     }

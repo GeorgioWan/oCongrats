@@ -17,6 +17,7 @@ class FetchPost extends Component {
         Parse Methods
     **/
     getPostID(url){
+        const { access_token } = this.props;
         let postURL = url.split('/');
         
         if ( postURL.length <= 1 || !postURL.includes( 'www.facebook.com' ) ){
@@ -31,7 +32,7 @@ class FetchPost extends Component {
         let type = pgID + 1;
         
         // Get id
-        FB.api(`/${postURL[ pgID ]}`, 'GET', {}, function(response) {
+        FB.api(`/${postURL[ pgID ]}`, 'GET', {access_token}, function(response) {
 
             let pgID = response.id ;
 
@@ -46,7 +47,7 @@ class FetchPost extends Component {
                 postID = postURL[ postID + 1  ];
             }
             
-            FB.api(`/${pgID}_${postID}`, 'GET', {}, function(response) {
+            FB.api(`/${pgID}_${postID}`, 'GET', {access_token}, function(response) {
                 if ( response.error ){
                     this.setState({
                         error: true,
@@ -92,6 +93,7 @@ class FetchPost extends Component {
         }
     }
     render() {
+        const { queriedDone } = this.props;
         const { pgID, postID, error, errorText, fetching } = this.state;
         let canIFetchNow = true;
         

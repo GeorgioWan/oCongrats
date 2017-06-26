@@ -17,7 +17,7 @@ class LotteryButton extends Component {
         } = this.props;
         
         return (
-            <span>
+            <span className="rc-lottery-btn">
                 {
                     quota <= total ?
                     <div className="rc-lottery-btn-info">從 {total} 人中抽 {quota} 位</div>

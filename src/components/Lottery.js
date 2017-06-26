@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { TextField } from 'react-md'
 
-import { LotteryButton } from './'
+import { LotteryButton, BangList } from './'
 
 class Lottery extends Component {
     constructor(props){
@@ -121,6 +121,7 @@ class Lottery extends Component {
                         onClick={this.handleLottery.bind(this, 2)}
                     />
                 </div>
+                <BangList bang={bang}/>
             </div>
         );
     }
