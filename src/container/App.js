@@ -3,6 +3,8 @@ import '../styles/App.scss'
 import React, { Component } from 'react'
 import update from 'react/lib/update'
 
+import { Drawer } from 'react-md'
+
 import * as firebase from 'firebase'
 
 import { 
@@ -72,7 +74,6 @@ class App extends Component {
             this.setState({ auth: false });
         }
         else {
-            //console.log('== UNKNOWN ==');
             //alert('You need to authorize to sign in with facebook');
             this.setState({ auth: false });
         }
@@ -89,7 +90,6 @@ class App extends Component {
         const { access_token } = this.state;
         
         FB.api( url, 'GET', {access_token, ...query},function(response) {
-            console.log(type, response);
             let datas  = [],
                 data   = response.data,
                 paging = response.paging;
@@ -173,6 +173,15 @@ class App extends Component {
         this.fetchData( 'comments', `/${postID}/comments`, commentsQuery );
         this.fetchData( 'shareds', `/${postID}/sharedposts`, sharedpostsQuery );
     }
+    handleBack(){
+        this.setState(update( this.state, {
+            queried: {
+                reactions: { $set: false },
+                comments: { $set: false },
+                shareds: { $set: false }
+            }
+        }));
+    }
     render() {
         const { auth, access_token, reactions, comments, shareds, queried } = this.state;
         const queriedDone = queried.reactions === true && 
@@ -194,6 +203,7 @@ class App extends Component {
                                 reactions={reactions}
                                 comments={comments}
                                 shareds={shareds}
+                                goBack={this.handleBack.bind(this)}
                             />
                             :
                             <FetchPost 

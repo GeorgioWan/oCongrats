@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { TextField } from 'react-md'
 
+import { Button } from 'react-md'
+
 import { LotteryButton, BangList } from './'
 
 class Lottery extends Component {
@@ -79,8 +81,13 @@ class Lottery extends Component {
             }
         }
         
-        console.log(bang);
         this.setState({ bang });
+    }
+    handleBack(){
+        const { goBack } = this.props;
+        
+        if( goBack )
+            goBack();
     }
     render() {
         const { reactions, comments, shareds } = this.props;
@@ -98,6 +105,12 @@ class Lottery extends Component {
                                onChange={ this.handleChange.bind(this) }
                     />
                 </div>
+                <Button 
+                    className="rc-back"
+                    icon
+                    iconClassName='fa fa-chevron-left'
+                    tooltipLabel='上一步'
+                    onClick={this.handleBack.bind(this)}></Button>
                 <div>
                     <LotteryButton 
                         label="從「心情」抽獎囉！"

@@ -56,6 +56,11 @@ html * {
             text-align: center;
         }
     }
+    .rc-back{
+        position: absolute;
+        left: 10px;
+        z-index: 99;
+    }
     .rc-lottery-btn{
         display: inline-block;
         
