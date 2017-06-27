@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Button, TextField, CircularProgress } from 'react-md'
+import { Button, TextField } from 'react-md'
+
+import { Spinner } from './'
 
 class FetchPost extends Component {
     constructor(props){
@@ -97,7 +99,6 @@ class FetchPost extends Component {
         }
     }
     render() {
-        const { queriedDone } = this.props;
         const { pgID, postID, error, errorText, fetching } = this.state;
         let canIFetchNow = true;
         
@@ -117,15 +118,13 @@ class FetchPost extends Component {
                                onChange={ this.handleURLChange.bind(this) }
                     />
                 </div>
+                {
+                    fetching ? <Spinner /> : ''
+                }
                 <Button raised secondary
                     label="幫你抓一把"
                     disabled={ canIFetchNow || fetching } 
-                    onClick={this.handleFetchDatas.bind(this)}>
-                {
-                    fetching === true ?
-                    <CircularProgress key="progress" id='progress' /> : ''
-                }    
-                </Button>
+                    onClick={this.handleFetchDatas.bind(this)}></Button>
                 <div className="rc-info-group">
                     <div className="rc-info"><b>留言‧按讚‧心情‧分享</b></div>
                     <div className="rc-info">能撈就撈，能抓就抓，抓好抓滿。</div>

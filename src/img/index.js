@@ -1,3 +1,5 @@
+export { default as SPINNER } from './spinner.svg'
+
 export { default as COMMENT } from './comment.png'
 export { default as SHARE } from './share.png'
 

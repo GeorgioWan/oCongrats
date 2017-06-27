@@ -42,7 +42,7 @@ class Bang extends Component {
         const { bang } = this.props;
         const type = bang.queryType;
         let id, bg_url, avatar, username, created_time, message;
-        let ttt ;
+
         if ( type === 'reactions' ){
             id = bang.id,
             bg_url = reactions.url[bang.type],
@@ -58,7 +58,7 @@ class Bang extends Component {
             created_time = this.timeFormat(bang.created_time),
             message = bang.message !== '' ? 
                         (
-                            bang.message.length > 20 ?
+                            (bang.message && bang.message.length > 20) ?
                             `${bang.message.substring(0,20)}...` : bang.message
                         )
                         :
@@ -93,10 +93,8 @@ class Bang extends Component {
         
         return (
             <Paper 
-                className="rc-bang-paper"
-                zDepth={0}
-                raiseOnHover={true}>
-                
+                className={ `rc-bang-paper bounceIn` }
+                zDepth={1}>
             { bangCard }
             </Paper>
         );

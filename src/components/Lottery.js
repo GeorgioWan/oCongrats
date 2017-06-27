@@ -3,7 +3,7 @@ import { TextField } from 'react-md'
 
 import { Button } from 'react-md'
 
-import { LotteryButton, BangList } from './'
+import { LotteryButton, BangList, Spinner } from './'
 
 class Lottery extends Component {
     constructor(props){
@@ -11,7 +11,8 @@ class Lottery extends Component {
         
         this.state = {
             quota: 1,
-            bang: []
+            bang: [],
+            loading: false
         };
     }
     /**
@@ -34,7 +35,7 @@ class Lottery extends Component {
     }
     handleLottery( type ) {
         const { reactions, comments, shareds } = this.props;
-        
+
         let { quota } = this.state;
         let id, bang = [];
         
@@ -81,7 +82,17 @@ class Lottery extends Component {
             }
         }
         
-        this.setState({ bang });
+        
+        this.setState({ 
+            bang,
+            loading: true
+        });
+        
+        setTimeout(()=>{
+            this.setState({ 
+                loading: false
+            });
+        }, 2000);
     }
     handleMinus(){
         let { quota } = this.state;
@@ -95,7 +106,7 @@ class Lottery extends Component {
     }
     render() {
         const { reactions, comments, shareds } = this.props;
-        const { quota, bang } = this.state;
+        const { quota, bang, loading } = this.state;
         
         return (
             <div id="rc-lottery">
@@ -145,7 +156,12 @@ class Lottery extends Component {
                         onClick={this.handleLottery.bind(this, 2)}
                     />
                 </div>
-                <BangList bang={bang}/>
+                {
+                    loading ?
+                    <Spinner />
+                    :
+                    <BangList bang={bang}/>
+                }
             </div>
         );
     }

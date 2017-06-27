@@ -11,11 +11,7 @@ import {
     Login,
     Lottery,
     FetchPost,
-    DrawerMenu,
-    
-    Reactions, 
-    Comments, 
-    Shareds 
+    DrawerMenu
 } from '../components'
 
 class App extends Component {
@@ -56,11 +52,7 @@ class App extends Component {
                 version: 'v2.9'
             });
             FB.AppEvents.logPageView();
-            
-            FB.getLoginStatus(function(response) {
-                this.checkLoginState();
-            }.bind(this));
-        }.bind(this);
+        };
     }
     /** 
         FB - Check Status 
@@ -212,11 +204,11 @@ class App extends Component {
             <div id="rc-main" >
                 <DrawerMenu user={user} onSignOut={this.handleFBLogin.bind(this)}/>
                 <div id="rc-title" className={ queriedDone ? 'up' : '' }>
-                    <h1>喔！我的開獎達人！</h1>
+                    <img className='sealIn' src='http://imgur.com/aBVlpnm.png'/>
                 </div>
                 <div id="rc-body" className={ queriedDone ? 'up' : '' }>
                 {
-                    auth === true ?
+                    auth ?
                     <div>
                         {
                             queriedDone ?

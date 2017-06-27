@@ -12,3 +12,5 @@ export { default as Reactions } from './Reactions'
 
 export { default as DrawerMenu } from './DrawerMenu'
 export { default as InfoDialog } from './InfoDialog'
+
+export { default as Spinner } from './Spinner'
