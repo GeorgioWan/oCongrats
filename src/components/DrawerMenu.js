@@ -107,9 +107,9 @@ class DrawerMenu extends Component {
                     visible={ this.state.how }
                     title="「電腦版」如何取得文章連結"
                     content={[
-                        <div>1. 貼文中找到<span className='rc-dialog-info-primary'>貼文時間</span></div>,
-                        <div>2. 點擊<span className='rc-dialog-info-primary'>右鍵</span></div>,
-                        <div>3. <span className='rc-dialog-info-primary'>複製連結網址</span>即可得到文章連結</div>
+                        <div key={0}>1. 貼文中找到<span className='rc-dialog-info-primary'>貼文時間</span></div>,
+                        <div key={1}>2. 點擊<span className='rc-dialog-info-primary'>右鍵</span></div>,
+                        <div key={2}>3. <span className='rc-dialog-info-primary'>複製連結網址</span>即可得到文章連結</div>
                     ]}
                     image='http://imgur.com/B35MFNf.gif'
                     closeDialog={this.closeDialog.bind(this)}/>
@@ -118,9 +118,9 @@ class DrawerMenu extends Component {
                     visible={ this.state.howMobile }
                     title="「手機版」如何取得文章連結"
                     content={[
-                        <div>1. 建議使用官方 App <span className='rc-dialog-info-primary'>專業小助手</span></div>,
-                        <div>2. 於貼文點擊<span className='rc-dialog-info-primary'>分享</span></div>,
-                        <div>3. <span className='rc-dialog-info-primary'>複製連結</span>即可得到文章連結</div>
+                        <div key={0}>1. 建議使用官方 App <span className='rc-dialog-info-primary'>專業小助手</span></div>,
+                        <div key={1}>2. 於貼文點擊<span className='rc-dialog-info-primary'>分享</span></div>,
+                        <div key={2}>3. <span className='rc-dialog-info-primary'>複製連結</span>即可得到文章連結</div>
                     ]}
                     image='http://imgur.com/OKXwaXk.gif'
                     closeDialog={this.closeDialog.bind(this)}/>
@@ -129,7 +129,7 @@ class DrawerMenu extends Component {
                     visible={ this.state.suggestion }
                     title="嘿！我想偷偷告訴你們..."
                     content={[
-                        <div>努力<span className='rc-dialog-info-primary'>開發中</span>，請先至粉絲團聯絡我們喲！</div>
+                        <div key={0}>努力<span className='rc-dialog-info-primary'>開發中</span>，請先至粉絲團聯絡我們喲！</div>
                     ]}
                     closeDialog={this.closeDialog.bind(this)}/>
             </div>
