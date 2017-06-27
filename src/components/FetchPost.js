@@ -47,6 +47,10 @@ class FetchPost extends Component {
                 postID = postURL[ postID + 1  ];
             }
             
+            // Solve mobile copy URL.
+            if ( postID.split(':').length > 0 )
+                postID = postID.split(':')[0];
+            
             FB.api(`/${pgID}_${postID}`, 'GET', {access_token}, function(response) {
                 if ( response.error ){
                     this.setState({
