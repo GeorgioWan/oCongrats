@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { Button, Drawer, ListItem, Toolbar, Divider, FontIcon } from 'react-md'
+import { Button, Drawer, ListItem, Toolbar, Divider, FontIcon, Dialog } from 'react-md'
+
+import { InfoDialog } from './'
 
 const InfoIcon = () => <FontIcon>info</FontIcon>;
 const ContactIcon = () => <FontIcon>question_answer</FontIcon>;
 
 class DrawerMenu extends Component {
     state = {
-        visible: false
+        visible: false,
+        how: false,
+        howMobile: false,
+        suggestion: false
     }
     handleClick(){
         const { visible } = this.state;
@@ -26,6 +31,17 @@ class DrawerMenu extends Component {
         if(onSignOut)
             onSignOut();
     }
+    handleOpenDialog(type){
+        if ( type === 0 )
+            this.setState({ how: true });
+        else if ( type === 1 )
+            this.setState({ howMobile: true });
+        else if ( type === 2 )
+            this.setState({ suggestion: true });
+    }
+    closeDialog(){
+        this.setState({ how: false, howMobile: false, suggestion: false });
+    }
     render() {
         const { user } = this.props;
         const { visible } = this.state;
@@ -39,9 +55,9 @@ class DrawerMenu extends Component {
         
         const items = [
             <ListItem primaryText="粉絲團" key={0}/>,
-            <ListItem primaryText="「電腦版」如何取得文章連結" rightIcon={<InfoIcon />} key={1}/>,
-            <ListItem primaryText="「手機版」如何取得文章連結" rightIcon={<InfoIcon />} key={2}/>,
-            <ListItem primaryText="嘿！我想提供建議或幫助" rightIcon={<ContactIcon />} key={3}/>,
+            <ListItem primaryText="「電腦版」如何取得文章連結" onClick={this.handleOpenDialog.bind(this, 0)} rightIcon={<InfoIcon />} key={1}/>,
+            <ListItem primaryText="「手機版」如何取得文章連結" onClick={this.handleOpenDialog.bind(this, 1)} rightIcon={<InfoIcon />} key={2}/>,
+            <ListItem primaryText="嘿！我想提供建議或幫助" onClick={this.handleOpenDialog.bind(this, 2)} rightIcon={<ContactIcon />} key={3}/>,
             <Divider key={4}/>,
         ];
         
@@ -85,6 +101,37 @@ class DrawerMenu extends Component {
                     type={Drawer.DrawerTypes.TEMPORARY}
                     style={{ zIndex: 999 }}
                     onVisibilityToggle={this.handleToggle.bind(this)}/>
+                
+                <InfoDialog
+                    id='rc-dialog-how'
+                    visible={ this.state.how }
+                    title="「電腦版」如何取得文章連結"
+                    content={[
+                        <div>1. 貼文中找到<span className='rc-dialog-info-primary'>貼文時間</span></div>,
+                        <div>2. 點擊<span className='rc-dialog-info-primary'>右鍵</span></div>,
+                        <div>3. <span className='rc-dialog-info-primary'>複製連結網址</span>即可得到文章連結</div>
+                    ]}
+                    image='http://imgur.com/B35MFNf.gif'
+                    closeDialog={this.closeDialog.bind(this)}/>
+                <InfoDialog
+                    id='rc-dialog-how-mobile'
+                    visible={ this.state.howMobile }
+                    title="「手機版」如何取得文章連結"
+                    content={[
+                        <div>1. 建議使用官方 App <span className='rc-dialog-info-primary'>專業小助手</span></div>,
+                        <div>2. 於貼文點擊<span className='rc-dialog-info-primary'>分享</span></div>,
+                        <div>3. <span className='rc-dialog-info-primary'>複製連結</span>即可得到文章連結</div>
+                    ]}
+                    image='http://imgur.com/OKXwaXk.gif'
+                    closeDialog={this.closeDialog.bind(this)}/>
+                <InfoDialog
+                    id='rc-dialog-suggestion'
+                    visible={ this.state.suggestion }
+                    title="嘿！我想偷偷告訴你們..."
+                    content={[
+                        <div>努力<span className='rc-dialog-info-primary'>開發中</span>，請先至粉絲團聯絡我們喲！</div>
+                    ]}
+                    closeDialog={this.closeDialog.bind(this)}/>
             </div>
         );
     }

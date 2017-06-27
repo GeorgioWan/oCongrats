@@ -11,3 +11,4 @@ export { default as Shareds } from './Shareds'
 export { default as Reactions } from './Reactions'
 
 export { default as DrawerMenu } from './DrawerMenu'
+export { default as InfoDialog } from './InfoDialog'
