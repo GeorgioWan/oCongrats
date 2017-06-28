@@ -176,12 +176,10 @@ class App extends Component {
             }, 
             commentsQuery = {
                 'fields': 'attachment,from{id,name,picture},message,like_count,created_time',
-                'filter': 'stream',
                 'limit' : '5000'
             },
             sharedpostsQuery = {
                 'fields': 'from{id,name,picture},message,created_time',
-                'filter': 'stream',
                 'limit' : '5000'
             };
         
