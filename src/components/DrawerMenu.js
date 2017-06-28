@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Drawer, ListItem, Toolbar, Divider, FontIcon, Dialog } from 'react-md'
+import { Button, Drawer, ListItem, Toolbar, Divider, FontIcon } from 'react-md'
 
 import { InfoDialog } from './'
 
@@ -63,13 +63,13 @@ class DrawerMenu extends Component {
         
         let key = 5 ;
         
-        if ( user.email ) {
+        if ( user.name ) {
             items.push(
                 <ListItem primaryText='' component={() => 
                     <div id="rc-drawer-user">
                         <img src={ user.photoURL } />
                         <h3>{user.name}</h3>
-                        <span>{user.email}</span>
+                        <span>{user.email || '－'}</span>
                     </div>
                 } key={key++}/>);
                 
