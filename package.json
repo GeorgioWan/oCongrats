@@ -1,7 +1,7 @@
 {
-  "name": "react-congrats",
-  "version": "1.0.0",
-  "description": "Describe react-congrats here",
+  "name": "oCongrats",
+  "version": "0.1.0",
+  "description": "This is a tool for the LOTTERY with Facebook.",
   "private": true,
   "scripts": {
     "build": "nwb build-react-app",
@@ -22,6 +22,6 @@
     "nwb-sass": "^0.8.1"
   },
   "author": "OAwan (https://github.com/GeorgioWan)",
-  "license": "MIT",
-  "repository": ""
+  "license": "CC BY-NC 3.0 TW",
+  "repository": "https://github.com/GeorgioWan/oCongrats"
 }
