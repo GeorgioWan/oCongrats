@@ -3,6 +3,8 @@ import '../styles/App.scss'
 import React, { Component } from 'react'
 import update from 'react/lib/update'
 
+import {TITLE_IMG} from '../img'
+
 import { Button } from 'react-md'
 
 import * as firebase from 'firebase'
@@ -213,7 +215,7 @@ class App extends Component {
             <div id="rc-main" >
                 <DrawerMenu user={user} onSignOut={this.handleFBLogin.bind(this)}/>
                 <div id="rc-title" className={ queriedDone ? 'up' : '' }>
-                    <img className='sealIn' src='http://imgur.com/aBVlpnm.png'/>
+                    <img className='sealIn' src={TITLE_IMG}/>
                 </div>
                 <div id="rc-body" className={ queriedDone ? 'up' : '' }>
                 {
