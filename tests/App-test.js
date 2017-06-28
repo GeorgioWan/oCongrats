@@ -2,7 +2,7 @@ import expect from 'expect'
 import React from 'react'
 import {render, unmountComponentAtNode} from 'react-dom'
 
-import App from 'src/App'
+import App from 'src/container/App'
 
 describe('App component', () => {
   let node
@@ -15,9 +15,11 @@ describe('App component', () => {
     unmountComponentAtNode(node)
   })
 
-  it('displays a welcome message', () => {
+  it('Container App', () => {
     render(<App/>, node, () => {
-      expect(node.textContent).toContain('Welcome to React')
+      let child = node.firstChild;
+      
+      expect(child.id).toContain('rc-main');
     })
   })
 })
