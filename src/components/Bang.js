@@ -51,7 +51,7 @@ class Bang extends Component {
             message = <span>對您的貼文表示 <b>{reactions.words[bang.type]}</b></span>;
         }
         else if ( type === 'comments' || type === 'shareds' ){
-            id = bang.from.id,
+            id = bang.id,
             bg_url = type === 'comments' ? COMMENT : SHARE,
             avatar = bang.from.picture.data.url,
             username = bang.from.name,
