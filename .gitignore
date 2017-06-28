@@ -4,3 +4,6 @@
 npm-debug.log*
 
 firebase-config.js
+firebase.json
+.firebaserc
+database.rules.json
