@@ -17,6 +17,7 @@ import {
 class App extends Component {
     state = {
         auth: false,
+        authFailed: false,
         user:{},
         access_token:'',
         reactions: [],
@@ -139,8 +140,9 @@ class App extends Component {
               let credential = error.credential;
               // ...
               
-              console.log( errorCode, errorMessage, email, credential );
-            });
+              this.setState({ authFailed: true });
+              console.warn( errorCode, errorMessage, email, credential );
+            }.bind(this));
             
         }
         else {
@@ -160,6 +162,8 @@ class App extends Component {
                 }
             }));
         }
+        
+        this.setState({authFailed: false});
     }
     handleFetchDatas( postID ) {
         const 
@@ -196,7 +200,12 @@ class App extends Component {
         }));
     }
     render() {
-        const { auth, user, access_token, reactions, comments, shareds, queried } = this.state;
+        const { 
+            auth, authFailed, 
+            user, access_token, 
+            reactions, comments, shareds, 
+            queried 
+        } = this.state;
         const queriedDone = queried.reactions === true && 
                             queried.comments  === true &&
                             queried.shareds   === true ;
@@ -225,7 +234,7 @@ class App extends Component {
                         }
                     </div> 
                     :
-                    <Login onClick={this.handleFBLogin.bind(this)}/>
+                    <Login authFailed={authFailed} onClick={this.handleFBLogin.bind(this)}/>
                 }
                 </div>
                 {

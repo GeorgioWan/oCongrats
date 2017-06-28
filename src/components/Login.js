@@ -7,6 +7,12 @@ class Login extends Component {
     state={
         isLogin: false
     }
+    componentWillReceiveProps(nextProps){
+        const { authFailed } = nextProps;
+        
+        if ( authFailed )
+            this.setState({ isLogin: false });
+    }
     handleFBLogin(){
         const { onClick } = this.props;
         
