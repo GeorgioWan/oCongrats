@@ -8,5 +8,7 @@ export const
     HAHA      = 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Ffacebook-haha.png?alt=media&token=32dbc17f-cc3d-49ee-a7c2-cd20cb43d582',
     SAD       = 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Ffacebook-sad.png?alt=media&token=cee89f6e-e46f-4f48-9d0f-4c64c7adfd02',
     WOW       = 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Ffacebook-wow.png?alt=media&token=a15e26ce-22e4-447f-b74b-8169801354d9',
-    ANGRY     = 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Ffacebook-angey.png?alt=media&token=d706de21-0102-4754-b815-940dc72e98d1';
+    ANGRY     = 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Ffacebook-angey.png?alt=media&token=d706de21-0102-4754-b815-940dc72e98d1',
+    HOW       = 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Fhow.gif?alt=media&token=3971a4c0-90ba-470d-ad30-b1c85a6b6f25',
+    HOW_MOBILE= 'https://firebasestorage.googleapis.com/v0/b/ocongrats.appspot.com/o/images%2Fhow_mobile.jpg?alt=media&token=ff6ff580-f711-4733-a8bf-0dc146ba6524';
 

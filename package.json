@@ -1,6 +1,6 @@
 {
   "name": "oCongrats",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This is a tool for the LOTTERY with Facebook.",
   "private": true,
   "scripts": {

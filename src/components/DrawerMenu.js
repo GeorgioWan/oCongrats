@@ -3,6 +3,8 @@ import { Button, Drawer, ListItem, Toolbar, Divider, FontIcon } from 'react-md'
 
 import { InfoDialog } from './'
 
+import { HOW, HOW_MOBILE } from '../img'
+
 const InfoIcon = () => <FontIcon>info</FontIcon>;
 const ContactIcon = () => <FontIcon>question_answer</FontIcon>;
 
@@ -111,7 +113,7 @@ class DrawerMenu extends Component {
                         <div key={1}>2. 點擊<span className='rc-dialog-info-primary'>右鍵</span></div>,
                         <div key={2}>3. <span className='rc-dialog-info-primary'>複製連結網址</span>即可得到文章連結</div>
                     ]}
-                    image='http://imgur.com/B35MFNf.gif'
+                    image={HOW}
                     closeDialog={this.closeDialog.bind(this)}/>
                 <InfoDialog
                     id='rc-dialog-how-mobile'
@@ -122,7 +124,7 @@ class DrawerMenu extends Component {
                         <div key={1}>2. 於貼文點擊<span className='rc-dialog-info-primary'>分享</span></div>,
                         <div key={2}>3. <span className='rc-dialog-info-primary'>複製連結</span>即可得到文章連結</div>
                     ]}
-                    image='http://imgur.com/OKXwaXk.gif'
+                    image={HOW_MOBILE}
                     closeDialog={this.closeDialog.bind(this)}/>
                 <InfoDialog
                     id='rc-dialog-suggestion'
