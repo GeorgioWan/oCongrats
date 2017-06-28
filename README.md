@@ -4,11 +4,12 @@
 [![CC BY-NC 3.0 TW](https://img.shields.io/badge/license-CC%20BY--NC%203.0-blue.svg)](https://creativecommons.org/licenses/by-nc/3.0/tw/legalcode)
 
 This is a tool for the **LOTTERY** with Facebook (now just Pages and Groups).
+
 Facebook 抽獎的最佳體驗工具，留言、按讚、心情與分享一把抓，還等什麼？**抽了啦！**
 
 # Contribution
 
-If you have any suggestions, please [GIVE SOME ISSUE](https://github.com/GeorgioWan//issues) or **PR** to this. :grin:
+If you have any suggestions, please [GIVE SOME ISSUE](https://github.com/GeorgioWan/oCongrats/issues) or **PR** to this. :grin:
 
 # License
 
