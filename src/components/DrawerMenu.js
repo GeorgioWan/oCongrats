@@ -5,6 +5,8 @@ import { InfoDialog } from './'
 
 import { HOW, HOW_MOBILE } from '../img'
 
+import ReactGA from 'react-ga'
+
 const InfoIcon = () => <FontIcon>info</FontIcon>;
 const ContactIcon = () => <FontIcon>question_answer</FontIcon>;
 
@@ -34,12 +36,24 @@ class DrawerMenu extends Component {
             onSignOut();
     }
     handleOpenDialog(type){
-        if ( type === 0 )
+        if ( type === 0 ){
             this.setState({ how: true });
-        else if ( type === 1 )
+            
+            FB.AppEvents.logEvent("handleOpenDialog", null, {CONTENT_TYPE: 'how_pc'});
+            ReactGA.ga('send', 'handleOpenDialog', 'reactions');
+        }
+        else if ( type === 1 ){
             this.setState({ howMobile: true });
-        else if ( type === 2 )
+            
+            FB.AppEvents.logEvent("handleOpenDialog", null, {CONTENT_TYPE: 'how_mobile'});
+            ReactGA.ga('send', 'handleOpenDialog', 'comments');
+        }
+        else if ( type === 2 ){
             this.setState({ suggestion: true });
+            
+            FB.AppEvents.logEvent("handleOpenDialog", null, {CONTENT_TYPE: 'suggestion'});
+            ReactGA.ga('send', 'handleOpenDialog', 'shareds');
+        }
     }
     closeDialog(){
         this.setState({ how: false, howMobile: false, suggestion: false });

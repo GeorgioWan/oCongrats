@@ -5,6 +5,8 @@ import { Button } from 'react-md'
 
 import { LotteryButton, BangList, Spinner } from './'
 
+import ReactGA from 'react-ga'
+
 class Lottery extends Component {
     constructor(props){
         super(props);
@@ -23,19 +25,8 @@ class Lottery extends Component {
         // 0: reactions, 1: comments, 2: shareds
         return random;
     }
-    /** 
-        Handle Event 
-    **/
-    handleChange(e){
-        let value = e;
-        value = value !== '' ? parseInt(value, 10) : 1;
-        value = value > 0 ? value : 1;
-        
-        this.setState({ quota: value });
-    }
-    handleLottery( type ) {
+    getLotteryList( type ){
         const { reactions, comments, shareds } = this.props;
-
         let { quota } = this.state;
         let id, bang = [];
         
@@ -82,6 +73,34 @@ class Lottery extends Component {
             }
         }
         
+        return bang;
+    }
+    /** 
+        Handle Event 
+    **/
+    handleChange(e){
+        let value = e;
+        value = value !== '' ? parseInt(value, 10) : 1;
+        value = value > 0 ? value : 1;
+        
+        this.setState({ quota: value });
+    }
+    handleLottery( type ) {
+        const { quota } = this.state;
+        const bang = this.getLotteryList( type );
+        
+        if( type === 0 ) {
+            FB.AppEvents.logEvent("handleLottery", quota, {CONTENT_TYPE: 'reactions'});
+            ReactGA.ga('send', 'handleLottery', 'reactions');
+        }
+        else if ( type === 1 ){
+            FB.AppEvents.logEvent("handleLottery", quota, {CONTENT_TYPE: 'comments'});
+            ReactGA.ga('send', 'handleLottery', 'comments');
+        }
+        else if ( type === 2 ){
+            FB.AppEvents.logEvent("handleLottery", quota, {CONTENT_TYPE: 'shareds'});
+            ReactGA.ga('send', 'handleLottery', 'shareds');
+        }
         
         this.setState({ 
             bang,

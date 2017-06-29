@@ -8,6 +8,7 @@ import {TITLE_IMG} from '../img'
 import { Button } from 'react-md'
 
 import * as firebase from 'firebase'
+import ReactGA from 'react-ga'
 
 import { 
     Login,
@@ -45,6 +46,8 @@ class App extends Component {
             js.src = "//connect.facebook.net/zh_TW/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+        
+        ReactGA.initialize('UA-72706538-3');
     }
     componentDidMount() {
         window.fbAsyncInit = function() {
@@ -56,6 +59,8 @@ class App extends Component {
             });
             FB.AppEvents.logPageView();
         };
+        
+        ReactGA.pageview(`${window.location.pathname}`);
     }
     /** 
         FB - Check Status 
@@ -146,6 +151,9 @@ class App extends Component {
               console.warn( errorCode, errorMessage, email, credential );
             }.bind(this));
             
+            
+            FB.AppEvents.logEvent("handleLogin");
+            ReactGA.ga('send', 'handleLogin');
         }
         else {
             firebase.auth().signOut();
@@ -163,6 +171,9 @@ class App extends Component {
                     shareds: { $set: false }
                 }
             }));
+            
+            FB.AppEvents.logEvent("handleSignout");
+            ReactGA.ga('send', 'handleSignout');
         }
         
         this.setState({authFailed: false});
@@ -186,6 +197,9 @@ class App extends Component {
         this.fetchData( 'reactions', `/${postID}/reactions`, reactionsQuery );
         this.fetchData( 'comments', `/${postID}/comments`, commentsQuery );
         this.fetchData( 'shareds', `/${postID}/sharedposts`, sharedpostsQuery );
+        
+        FB.AppEvents.logEvent("handleFetchDatas");
+        ReactGA.ga('send', 'handleFetchDatas');
     }
     handleBack(){
         this.setState(update( this.state, {
@@ -225,7 +239,6 @@ class App extends Component {
                                 reactions={reactions}
                                 comments={comments}
                                 shareds={shareds}
-                                goBack={this.handleBack.bind(this)}
                             />
                             :
                             <FetchPost 
