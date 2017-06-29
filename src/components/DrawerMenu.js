@@ -54,6 +54,12 @@ class DrawerMenu extends Component {
             FB.AppEvents.logEvent("handleOpenDialog", null, {CONTENT_TYPE: 'suggestion'});
             ReactGA.ga('send', 'handleOpenDialog', 'shareds');
         }
+        else if ( type === 3 ){
+            FB.AppEvents.logEvent("handleOpenDialog", null, {CONTENT_TYPE: 'pages'});
+            ReactGA.ga('send', 'handleOpenDialog', 'pages');
+            
+            window.open('https://www.facebook.com/ocongrats/', '_blank');
+        }
     }
     closeDialog(){
         this.setState({ how: false, howMobile: false, suggestion: false });
@@ -70,7 +76,7 @@ class DrawerMenu extends Component {
         );
         
         const items = [
-            <ListItem primaryText="粉絲團" key={0}/>,
+            <ListItem primaryText="粉絲團" onClick={this.handleOpenDialog.bind(this, 3)} key={0}/>,
             <ListItem primaryText="「電腦版」如何取得文章連結" onClick={this.handleOpenDialog.bind(this, 0)} rightIcon={<InfoIcon />} key={1}/>,
             <ListItem primaryText="「手機版」如何取得文章連結" onClick={this.handleOpenDialog.bind(this, 1)} rightIcon={<InfoIcon />} key={2}/>,
             <ListItem primaryText="嘿！我想提供建議或幫助" onClick={this.handleOpenDialog.bind(this, 2)} rightIcon={<ContactIcon />} key={3}/>,
