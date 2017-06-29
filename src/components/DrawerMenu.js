@@ -67,7 +67,7 @@ class DrawerMenu extends Component {
     render() {
         const { user } = this.props;
         const { visible } = this.state;
-        const close = <Button icon onClick={this.handleClose.bind(this)}>arrow_back</Button>;
+        const close = <Button icon onClick={this.handleClose.bind(this)}>arrow_forward</Button>;
         const header = (
             <Toolbar
                 actions={close}
@@ -117,7 +117,7 @@ class DrawerMenu extends Component {
                 <Button icon iconClassName='fa fa-bars' onClick={this.handleClick.bind(this)}></Button>
                 <Drawer 
                     visible={visible}
-                    position='left'
+                    position='right'
                     header={header}
                     navItems={items}
                     type={Drawer.DrawerTypes.TEMPORARY}
