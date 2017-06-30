@@ -16,7 +16,7 @@ If you have any suggestions, please [GIVE SOME ISSUE](https://github.com/Georgio
 ## Toolkit
 - [nwb](https://github.com/insin/nwb)
 
-## Kernal
+## Kernel
 - [React](https://facebook.github.io/react/)
 
 ## Library 
