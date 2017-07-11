@@ -276,13 +276,18 @@ class App extends Component {
                     <Button id="rc-back" icon iconClassName='fa fa-chevron-left' tooltipLabel='上一步' onClick={this.handleBack.bind(this)}></Button>
                     : ''
                 }
-                {
-                    screen.width > 768 ?
-                    <div id="rc-footer" className={ queriedDone ? 'down' : '' }>
-                        Copyright © 2017 <span className="fa fa-heart"></span> <b>OAwan</b>
+                
+                    
+                    <div id="rc-footer">
+                        <div className="rc-version">BETA v0.1.4</div>
+                        {
+                            screen.width > 768 ?
+                            <span>Copyright © 2017 <span className="fa fa-heart"></span> <b>OAwan</b></span>
+                            : ''
+                        }
                     </div>
-                    : ''
-                }
+                    
+                
             </div>
         );
     }

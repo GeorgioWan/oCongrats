@@ -77,7 +77,10 @@ html * {
     color: #fff;
     opacity: .8;
     
-    span{
+    .rc-version{
+        opacity: .5;
+    }
+    .fa-heart{
         color: $md-secondary-color;
     }
     b{

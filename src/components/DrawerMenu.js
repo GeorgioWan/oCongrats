@@ -15,7 +15,7 @@ class DrawerMenu extends Component {
         visible: false,
         how: false,
         howMobile: false,
-        suggestion: false
+        suggestion: true
     }
     handleClick(){
         const { visible } = this.state;
@@ -149,9 +149,11 @@ class DrawerMenu extends Component {
                 <InfoDialog
                     id='rc-dialog-suggestion'
                     visible={ this.state.suggestion }
-                    title="嘿！我想偷偷告訴你們..."
+                    title="✨NEW✨ 我有話想說..."
                     content={[
-                        <div key={0}>努力<span className='rc-dialog-info-primary'>開發中</span>，請先至粉絲團聯絡我們喲！</div>
+                        <div key={0}>有話想說嗎？</div>,
+                        <div key={1}>歡迎使用<span className='rc-dialog-info-primary'>右下角的新功能</span>，留下建議與回饋，或是聊聊吧！</div>,
+                        <div key={2}><br/>一起讓抽獎體驗更有趣、更美好 😉</div>
                     ]}
                     closeDialog={this.closeDialog.bind(this)}/>
             </div>
